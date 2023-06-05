@@ -43,9 +43,10 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() * 3000 * 60 * 24))
-                .signWith(getSigningKey(), SignatureAlgorithm.ES256)
-                .compact();
+                .setExpiration(new Date(System.currentTimeMillis() * 100000000 * 60 * 24))
+//                .signWith(getSigningKey(), SignatureAlgorithm.ES256)
+//                .compact();
+                .signWith( getSigningKey(), SignatureAlgorithm.HS256 ).compact();
     }
 
     public boolean isTokenValid (String token,UserDetails userDetails){
